@@ -1,0 +1,4 @@
+repository "SimplePlatformer@LGDMakesGames@cloud"
+  path "/"
+    br "/main"
+    co "/main"

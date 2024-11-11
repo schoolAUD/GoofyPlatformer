@@ -14,12 +14,23 @@ public class MovingPlatform : MonoBehaviour
     private float CurrentYPos;
     private bool movingUp = true;
     private bool movingRight = true;
+    public bool swapY = false;
+    public bool swapX = false;
 
     // Start is called before the first frame update
     void Start()
     {
         XPos = this.transform.position.x;
         YPos = this.transform.position.y;
+
+        if (swapY)
+        {
+            movingUp = false;
+        }
+        if (swapX)
+        {
+            movingRight = false;
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +62,8 @@ public class MovingPlatform : MonoBehaviour
                 movingRight = true;
             }
         }
+        CurrentXPos = this.transform.position.x;
+        CurrentYPos = this.transform.position.y;
 
         // handle vertical movement
         if (movingUp)

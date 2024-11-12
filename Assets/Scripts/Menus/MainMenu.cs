@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,12 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        int test = PlayerPrefs.GetInt("currentLevel");
+        if (test == 0)
+        {
+            PlayerPrefs.SetInt("currentLevel", 1);
+            PlayerPrefs.SetString("speedrun", "false");
+        }
     }
 
     // Update is called once per frame

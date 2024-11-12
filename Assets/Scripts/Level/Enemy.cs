@@ -6,12 +6,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float wanderRadius = 2.0f;
+    public AudioSource audioSource;
+    public AudioClip deathAudioClip;
     private float ogxpos;
     private bool direction = false;
     // Start is called before the first frame update
     void Start()
     {
         ogxpos = this.transform.position.x;
+        audioSource = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void enemyDeath() {
+        audioSource.PlayOneShot(deathAudioClip);
         this.gameObject.transform.localScale = new Vector3(5.69f, 2.0f);
         Invoke("enemyVanish", 0.5f);
     }

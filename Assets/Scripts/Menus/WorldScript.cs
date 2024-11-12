@@ -15,6 +15,7 @@ public class WorldScript : MonoBehaviour
     public int World5;
     public int World6;
     public int World7;
+    public int startNum;
     // Start is called before the first frame update
     void Start()
     {

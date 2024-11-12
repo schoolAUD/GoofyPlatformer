@@ -21,7 +21,14 @@ public class Player : MonoBehaviour
     private Vector3 lastPlatformPosition;
     private bool onPlatform;
 
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
+    public AudioSource jumpAudioSource;
+
+    public AudioClip jumpAudioClip;
+    public AudioClip deathAudioClip;
+    public AudioClip fellAudioClip;
+    public AudioClip coinAudioClip;
+    public AudioClip powerUpAudioClip;
 
     private float jumpMomentum = 0f;
     private bool jumpIncreasing = false;
@@ -36,6 +43,7 @@ public class Player : MonoBehaviour
         originalposition = transform.position;
         actualPlayerSpeed = playerSpeed;
         pcamera = (Camera) FindObjectOfType(typeof(Camera));
+        jumpAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -74,6 +82,7 @@ public class Player : MonoBehaviour
             Debug.Log(jumping.ToString()+canJump.ToString()+jumpMomentum.ToString());
             if (jumping == false && canJump == true) // conditions to prevent jumping whilst falling (mostly works)
             {
+                jumpAudioSource.PlayOneShot(jumpAudioClip);
                 jumping = true; // sets jumping to true
                 Invoke("setJumpingFalse", 0.4f); // 0.4 second interval before jumping = false -- added this because you couldn't jump.
             }
@@ -101,6 +110,7 @@ public class Player : MonoBehaviour
         // player falling to death check
         if (playerY < -5 && !dead) {
             playerDeath();
+            jumpAudioSource.PlayOneShot(fellAudioClip);
         }
 
         // move with X platforms
@@ -143,9 +153,11 @@ public class Player : MonoBehaviour
         canJump = true;
         if (collision.gameObject.name.ToLower().Contains("spike")) {
             playerDeath();
+            jumpAudioSource.PlayOneShot(deathAudioClip);
         } else if (collision.gameObject.name.ToLower().Contains("gobble")) {
             if (collision.gameObject.transform.position.y + 1 > transform.position.y && collision.gameObject.transform.localScale.y != 2.0f) {
                 playerDeath();
+                jumpAudioSource.PlayOneShot(deathAudioClip);
             }
         }
     }

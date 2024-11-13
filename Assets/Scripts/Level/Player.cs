@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public Transform player; // the player. also public so we can set it.
     public SpriteRenderer sprRender; // the sprite, so we can flip it when needed
-    public float playerSpeed = 2.0f; // playerspeed. public because we can modify it for later levels where we want to go FAST.
+    public float playerSpeed = 5.0f; // playerspeed. public because we can modify it for later levels where we want to go FAST.
     private float actualPlayerSpeed; // actualplayerspeed. is used for sprinting and walking, but not for changing jump height.
     private bool sprinting = false; // are we sprinting?
     private bool jumping = false; // jumping variable
@@ -33,10 +34,12 @@ public class Player : MonoBehaviour
     private float jumpMomentum = 0f;
     private bool jumpIncreasing = false;
     private Camera pcamera;
-    private bool dead = false;
+    public bool dead = false;
     private Vector3 deadpos = new Vector3(0,0);
 
     private Vector3 originalposition;
+
+    private Rigidbody2D playerRB;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,7 @@ public class Player : MonoBehaviour
         actualPlayerSpeed = playerSpeed;
         pcamera = (Camera) FindObjectOfType(typeof(Camera));
         jumpAudioSource = GetComponent<AudioSource>();
+        playerRB = GetComponent<Rigidbody2D>(); 
     }
 
     // Update is called once per frame
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
 
         sprinting = Input.GetKey(KeyCode.LeftShift);
         if (sprinting) {
-            actualPlayerSpeed = playerSpeed*2.5f;
+            actualPlayerSpeed = playerSpeed*1.5f;
         } else {
             actualPlayerSpeed = playerSpeed;
         }
@@ -85,9 +89,10 @@ public class Player : MonoBehaviour
                 jumpAudioSource.PlayOneShot(jumpAudioClip);
                 jumping = true; // sets jumping to true
                 Invoke("setJumpingFalse", 0.4f); // 0.4 second interval before jumping = false -- added this because you couldn't jump.
+                playerRB.AddForce(transform.up * (playerSpeed*1.5f), ForceMode2D.Impulse);
             }
         }
-        if (jumping == true)
+        if (jumping == true && false == true)
         {
             jumpMomentum = 3f;
          playerX = transform.position.x;
@@ -131,6 +136,11 @@ public class Player : MonoBehaviour
             player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             player.transform.position = deadpos;
         }
+
+        if (Input.GetKey(KeyCode.Escape)) 
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void LateUpdate() {
@@ -155,7 +165,7 @@ public class Player : MonoBehaviour
             playerDeath();
             jumpAudioSource.PlayOneShot(deathAudioClip);
         } else if (collision.gameObject.name.ToLower().Contains("gobble")) {
-            if (collision.gameObject.transform.position.y + 1 > transform.position.y && collision.gameObject.transform.localScale.y != 2.0f) {
+            if ((collision.gameObject.transform.position.y + 1 > transform.position.y && collision.gameObject.transform.localScale.y != 2.0f) || collision.gameObject.name.ToLower().Contains("boss")) {
                 playerDeath();
                 jumpAudioSource.PlayOneShot(deathAudioClip);
             }

@@ -37,10 +37,14 @@ public class Enemy : MonoBehaviour
             }
             this.GetComponent<SpriteRenderer>().flipX = false;
         }
+        xpos = this.transform.position.x;
+        float ypos = this.transform.position.y;
+
+        this.transform.rotation = new Quaternion(0,0,0,0);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.transform.position.y > this.gameObject.transform.position.y + 1) {
+        if (collision.gameObject.transform.position.y > this.gameObject.transform.position.y + 1 && !collision.gameObject.name.ToLower().Contains("platform")) {
             enemyDeath();
         } else {
             direction = !direction;

@@ -67,4 +67,9 @@ public class WorldScript : MonoBehaviour
     {
         loadScene(World7);
     }
+
+    public void back()
+    {
+        loadScene(1);
+    }
 }

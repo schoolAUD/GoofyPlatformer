@@ -28,4 +28,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1); // wow, so long and complicated
     }
+
+    public void resetData()
+    {
+        PlayerPrefs.SetInt("currentLevel", 1);
+        PlayerPrefs.SetString("speedrun", "false");
+    }
 }

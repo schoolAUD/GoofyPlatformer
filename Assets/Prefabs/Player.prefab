@@ -4960,7 +4960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 982442549335086481}
   sprRender: {fileID: 5160996065120371815}
-  playerSpeed: 2.6
+  playerSpeed: 5
   particleSystem: {fileID: 8005823805293902340}
   jumpAudioSource: {fileID: 0}
   jumpAudioClip: {fileID: 8300000, guid: 86a5f46c388464646b9299db1b4dab51, type: 3}
@@ -4968,6 +4968,7 @@ MonoBehaviour:
   fellAudioClip: {fileID: 8300000, guid: f2aec07d429d87d4297e63adaa5b50c3, type: 3}
   coinAudioClip: {fileID: 8300000, guid: b414d0232a8c0314f91fa292c2c923dc, type: 3}
   powerUpAudioClip: {fileID: 8300000, guid: f9543523ff2125e4891c0df4f96666cb, type: 3}
+  dead: 0
 --- !u!61 &2614041666967399684
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -405,9 +405,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: We only have 4 levels finished for this version of the demo, but we hope
-    to expand on this platformer and make it better as time goes on. We hope you
-    had fun!
+  m_text: We only have the first world for the demo, but we hope to expand on this
+    platformer and make it better as time goes on. We hope you had fun!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
